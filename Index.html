@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manish packaging</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff7ed;
+      color: #2d3748;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #1a202c, #2b6cb0);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-left: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f6ad55;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517420704952-d9f39e95b97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: #fff;
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero button {
+      background: #f6ad55;
+      color: #1a202c;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .hero button:hover {
+      background: #ed8936;
+      transform: scale(1.05);
+    }
+
+    /* About Us Section */
+    .about {
+      background: linear-gradient(rgba(255,247,237,0.9), rgba(255,247,237,0.9)), url('https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 1.5rem;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+    }
+
+    /* Contact Us Section */
+    .contact {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #f8fafc;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact a {
+      color: #2b6cb0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .contact a:hover {
+      color: #f6ad55;
+    }
+
+    .contact .call-btn {
+      display: inline-block;
+      background: #2b6cb0;
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact .call-btn:hover {
+      background: #f6ad55;
+      transform: scale(1.05);
+    }
+
+    /* Products Section */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin: 1rem 0 0.5rem;
+      color: #2d3748;
+    }
+
+    .product-card p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #c53030;
+      margin-bottom: 1rem;
+    }
+
+    .product-card button {
+      background: #2b6cb0;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .product-card button:hover {
+      background: #f6ad55;
+      transform: scale(1.05);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #f6ad55;
+      color: #1a202c;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Cart Modal */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .cart-box {
+      background: #fff;
+      width: 100%;
+      max-width: 450px;
+      height: 100%;
+      padding: 2rem;
+      border-radius: 0;
+      position: relative;
+      animation: slideInRight 0.4s ease;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .cart-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #2d3748;
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-box ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-box li {
+      font-size: 1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #edf2f7;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #2d3748;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #c53030;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.9rem;
+      margin: 0.7rem 0;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #f6ad55;
+      box-shadow: 0 0 6px rgba(246, 173, 85, 0.5);
+    }
+
+    .cart-box button {
+      background: #2b6cb0;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      width: 100%;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .cart-box button:hover {
+      background: #f6ad55;
+      transform: scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      background: #1a202c;
+      color: #fff;
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-media {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-media a {
+      color: #fff;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2d3748;
+      border-radius: 50%;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-media a:hover {
+      background: #f6ad55;
+      transform: scale(1.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero, .about, .contact {
+        padding: 3rem 1.5rem;
+        min-height: 400px;
+      }
+      .hero h2, .about h2, .contact h2 {
+        font-size: 2rem;
+      }
+      .hero p, .about p, .contact p {
+        font-size: 1rem;
+      }
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        padding: 2rem 1rem;
+      }
+      .product-card img {
+        height: 180px;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1a202c;
+        width: 200px;
+        padding: 1rem;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      .cart-box {
+        width: 100%;
+        max-width: none;
+      }
+      .social-media a {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Manish packaging</h1>
+    <nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <div class="nav-links">
+        <a href="#home" aria-label="Home">Home</a>
+        <a href="#about" aria-label="About">About</a>
+        <a href="#contact" aria-label="Contact">Contact</a>
+        <a href="#" onclick="showCart()" aria-label="View Cart">🛒 Cart (<span id="cart-count">0</span>)</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home" data-aos="fade-up">
+    <h2>Discover Premium Packing Accessories</h2>
+    <p>Shop stylish name tags, collars, and more for your furry friends</p>
+    <button onclick="scrollToProducts()">Shop Now</button>
+  </section>
+
+  <section class="about" id="" data-aos="fade-up">
+    <h2>About Manish packaging</h2>
+    <p>Manish Packing Service is a trusted name in the world of packing and moving, dedicated to providing reliable, efficient, and hassle-free relocation solutions. With years of experience in the industry, we specialize in residential, commercial, and industrial packing services tailored to meet the unique needs of each client.</p>
+    <p>At Manish Packing Service, customer satisfaction is our top priority. Our skilled team uses high-quality materials and modern techniques to ensure the safe handling and transportation of your valuables. Whether you're shifting locally or across long distances, we take the stress out of your move with professionalism, care, and precision.!</p>
+  </section>
+
+  <section class="products" id="products" data-aos="fade-up" data-aos-delay="100">
+    <div class="product-card" data-tilt data-tilt-max="10">
+      <img src="cartoon.jpg" alt="Cartoon packages">
+      <span class="badge">New</span>
+      <h3>cartoom package (300 U)</h3>
+      <p>₹500</p>
+      <button onclick="addToCart('Matte House for Dogs', 1299)">Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-tilt data-tilt-max="10">
+      <img src="wrapper.jpg" alt="manish sahu">
+      <span class="badge">Popular</span>
+      <h3>manish sahu</h3>
+      <p>₹19000</p>
+      <button onclick="addToCart(plastick  bottol wrapper', 1499)">Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-tilt data-tilt-max="10">
+      <img src="bidlg.jpg" alt="Big boxes for packing">
+      <span class="badge">Sale</span>
+      <h3>Big boxes for packing</h3>
+      <p>₹1399</p>
+      <button onclick="addToCart('Big boxes for packing', 1399)">Add to Cart</button>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" data-aos="fade-up">
+    <h2>Contact Us</h2>
+    <p>Have questions or need help? Reach out to our friendly team!</p>
+    <p><strong>Call Us:</strong> <a href="tel:+91-8819048660" class="call-btn" aria-label="Call Manish packaging">+91-9285247739</a></p>
+    <p><strong>Email:</strong> <a href="mailto:manishsahujiguna@gmail.com" aria-label="Email Sahu Pet Emporium">support@sahupetemporium.com</a></p>
+    <p><strong>Address:</strong> SADAR BAZAR, GUNA, M.P., India</p>
+  </section>
+
+  <div id="cart-overlay" class="cart-overlay">
+    <div class="cart-box">
+      <span class="close-btn" onclick="hideCart()" aria-label="Close Cart">❌</span>
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <p><strong>Total: ₹<span id="cart-total">0</span></strong></p>
+
+      <h3>Shipping Details</h3>
+      <input type="text" id="customer-name" placeholder="Full Name" required aria-label="Full Name">
+      <input type="text" id="customer-address" placeholder="Full Address" required aria-label="Full Address">
+      <input type="email" id="customer-email" placeholder="Email" required aria-label="Email">
+      <input type="tel" id="customer-phone" placeholder="Phone Number" required aria-label="Phone Number">
+      <button onclick="checkout()">🛒 Buy Now</button>
+    </div>
+  </div>
+
+  <footer data-aos="fade-up">
+    <p>© 2025 Manish packaging. All rights reserved.</p>
+    <div class="social-media">
+      <a href="https://www.instagram.com/manish_sahu2003" target="_blank" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.twitter.com/" target="_blank" aria-label="Follow us on Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.facebook.com/" target="_blank" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800 });
+
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      document.getElementById('cart-count').innerText = cart.length;
+      alert(`${name} added to cart!`);
+    }
+
+    function showCart() {
+      let items = '';
+      let total = 0;
+      cart.forEach(item => {
+        items += `<li>${item.name} <span>₹${item.price}</span></li>`;
+        total += item.price;
+      });
+      document.getElementById('cart-items').innerHTML = items;
+      document.getElementById('cart-total').innerText = total;
+      document.getElementById('cart-overlay').style.display = 'flex';
+    }
+
+    function hideCart() {
+      document.getElementById('cart-overlay').style.display = 'none';
+    }
+
+    function checkout() {
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      if (total === 0) return alert("Your cart is empty!");
+
+      const name = document.getElementById("customer-name").value;
+      const address = document.getElementById("customer-address").value;
+      const email = document.getElementById("customer-email").value;
+      const phone = document.getElementById("customer-phone").value;
+
+      if (!name || !address || !email || !phone) {
+        return alert("Please fill all shipping details.");
+      }
+
+      const options = {
+        "key": "API", // Replace with your Razorpay Key
+        "amount": total * 100,
+        "currency": "INR",
+        "name": "Manish packaging",
+        "description": "Order Payment",
+        "prefill": {
+          "name": name,
+          "email": email,
+          "contact": phone
+        },
+        "notes": {
+          "address": address
+        },
+        "handler": function (response) {
+          alert(`✅ Payment successful!\nPayment ID: ${response.razorpay_payment_id}`);
+          cart = [];
+          document.getElementById('cart-count').innerText = '0';
+          document.getElementById('cart-items').innerHTML = '';
+          document.getElementById('cart-total').innerText = '0';
+          hideCart();
+        },
+        "theme": {
+          "color": "#2b6cb0"
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    function scrollToProducts() {
+      document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
