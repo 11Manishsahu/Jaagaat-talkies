@@ -111,6 +111,43 @@
       alert("✅ Booking created!\n\n(Razorpay gateway will be integrated here)");
     });
   </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const form = document.getElementById("bookingForm");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const movie = document.getElementById("movieTitle").innerText;
+    const date = document.getElementById("date").value;
+    const showtime = document.getElementById("showtime").value;
+    const seats = parseInt(document.getElementById("seats").value);
+    const email = document.getElementById("email").value;
+    const amount = 500 * seats * 100; // in paise
+
+    const options = {
+      key: "rzp_test_1DP5mmOlF5G5ag", // Replace with your actual Razorpay Key ID
+      amount: amount,
+      currency: "INR",
+      name: "Jaagat Talkis",
+      description: `${movie} - ${showtime} (${date})`,
+      image: "https://i.ibb.co/gZ4Rprm/concert.jpg",
+      handler: function (response) {
+        alert("✅ Payment Successful!\nTicket sent to: " + email);
+        // Optionally send this to a server or trigger ticket download
+      },
+      prefill: {
+        email: email
+      },
+      theme: {
+        color: "#e50914"
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+  });
+</script>
 
 </body>
 </html>
