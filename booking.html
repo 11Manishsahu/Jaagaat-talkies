@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Tickets - Jaagat Talkis</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .booking-container {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    label {
+      margin-top: 1rem;
+      display: block;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      background: #333;
+      color: #fff;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.8rem;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .price {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #00ff99;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎟️ Book Your Ticket</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Support</a>
+    </nav>
+  </header>
+
+  <div class="booking-container">
+    <h2 id="movieTitle">Movie</h2>
+    
+    <form id="bookingForm">
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" required />
+
+      <label for="showtime">Select Show Time:</label>
+      <select id="showtime" required>
+        <option value="9 AM">9 AM</option>
+        <option value="12 PM">12 PM</option>
+        <option value="3 PM">3 PM</option>
+        <option value="6 PM">6 PM</option>
+        <option value="9 PM">9 PM</option>
+      </select>
+
+      <label for="seats">Number of Seats:</label>
+      <select id="seats" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+
+      <div class="price">Total: ₹<span id="totalPrice">500</span></div>
+
+      <button type="submit">Pay with Razorpay</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Jaagat Talkis • All rights reserved</p>
+  </footer>
+
+  <script>
+    const query = new URLSearchParams(window.location.search);
+    const movie = query.get("movie") || "Selected Movie";
+    document.getElementById("movieTitle").innerText = movie;
+
+    const seatSelect = document.getElementById("seats");
+    const priceDisplay = document.getElementById("totalPrice");
+    const pricePerTicket = 500;
+
+    seatSelect.addEventListener("change", () => {
+      const seats = parseInt(seatSelect.value);
+      priceDisplay.innerText = pricePerTicket * seats;
+    });
+
+    document.getElementById("bookingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("✅ Booking created!\n\n(Razorpay gateway will be integrated here)");
+    });
+  </script>
+
+</body>
+</html>
+
