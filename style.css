@@ -1,86 +1,94 @@
-body {
+/* Reset some defaults */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
   font-family: 'Segoe UI', sans-serif;
-  background: #111;
-  color: #fff;
+  background-color: #121212;
+  color: #f0f0f0;
 }
 
+/* Header */
 header {
   background: #000;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+header h1 {
+  color: #e50914;
+}
 nav a {
-  margin: 0 1rem;
   color: #ccc;
   text-decoration: none;
+  margin-left: 1rem;
+}
+nav a:hover {
+  text-decoration: underline;
 }
 
-.banner {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-}
-
-.banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.banner-text {
-  position: absolute;
-  bottom: 20px;
-  left: 30px;
-  color: #fff;
-}
-
-.booking, .cart-section, .login-form {
-  max-width: 600px;
-  margin: 2rem auto;
-  background: #222;
+/* Hero Section */
+.hero {
   padding: 2rem;
-  border-radius: 10px;
+  text-align: center;
+}
+.hero h2 {
+  margin-bottom: 1rem;
 }
 
-input, select, button {
-  display: block;
+/* Movie Cards */
+.movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.movie-card {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 300px;
+  transition: transform 0.3s;
+}
+.movie-card img {
   width: 100%;
-  padding: 0.8rem;
-  margin: 1rem 0;
   border-radius: 5px;
-  border: none;
 }
-
-button {
+.movie-card h3 {
+  margin: 0.8rem 0 0.4rem;
+}
+.movie-card p {
+  font-size: 0.9rem;
+}
+.movie-card button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
   background: #e50914;
-  color: white;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
+.movie-card:hover {
+  transform: scale(1.03);
+}
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem;
   background: #000;
-  color: #aaa;
-  margin-top: 3rem;
+  color: #999;
+  margin-top: 2rem;
 }
 
-#supportBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 12px 20px;
-  cursor: pointer;
-  font-size: 16px;
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
-
-
