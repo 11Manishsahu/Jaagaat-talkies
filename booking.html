@@ -111,11 +111,11 @@
       alert("✅ Booking created!\n\n(Razorpay gateway will be integrated here)");
     });
   </script>
-<script src="https://sdk.cashfree.com/js/v3/cashfree.js"> </script>
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 <script>
-  const form = document.getElementById("bookingForm");
+  const cashfree = Cashfree({ mode: "sandbox" }); // Change to "production" when live
 
-  form.addEventListener("submit", function(e) {
+  document.getElementById("bookingForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const movie = document.getElementById("movieTitle").innerText;
@@ -123,32 +123,38 @@
     const showtime = document.getElementById("showtime").value;
     const seats = parseInt(document.getElementById("seats").value);
     const email = document.getElementById("email").value;
-    const amount = 500 * seats * 100; // in paise
+    const amount = 100 * seats; // Ticket price in INR
 
-    const options = {
-      key: "cfsk_ma_prod_d0743d81bc1c7a145d0caaedb4bb86fb_0d434450", // Replace with your actual Razorpay Key ID
-      amount: amount,
-      currency: "INR",
-      name: "Jaagat Talkis",
-      description: `${movie} - ${showtime} (${date})`,
-      image: "https://i.ibb.co/gZ4Rprm/concert.jpg",
-      handler: function (response) {
-        alert("✅ Payment Successful!\nTicket sent to: " + email);
-        // Optionally send this to a server or trigger ticket download
-      },
-      prefill: {
-        email: email
-      },
-      theme: {
-        color: "#e50914"
+    try {
+      // 1️⃣ Call your backend to create an order in Cashfree
+      const res = await fetch("/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderAmount: amount,
+          customerEmail: email,
+          customerName: "Jaagat Talkis Customer",
+          customerPhone: "9999999999", // required by Cashfree
+          orderNote: `${movie} - ${showtime} (${date})`
+        })
+      });
+
+      const data = await res.json();
+
+      if (!data.payment_session_id) {
+        alert("❌ Failed to create payment order.");
+        return;
       }
-    };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
+      // 2️⃣ Open Cashfree payment page
+      cashfree.pay({
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_self" // or "_blank" for new tab
+      });
+
+    } catch (err) {
+      console.error(err);
+      alert("Payment failed to start.");
+    }
   });
 </script>
-
-</body>
-</html>
-
