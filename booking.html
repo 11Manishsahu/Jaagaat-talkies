@@ -99,7 +99,7 @@
 
     const seatSelect = document.getElementById("seats");
     const priceDisplay = document.getElementById("totalPrice");
-    const pricePerTicket = 500;
+    const pricePerTicket = 100;
 
     seatSelect.addEventListener("change", () => {
       const seats = parseInt(seatSelect.value);
@@ -111,7 +111,7 @@
       alert("✅ Booking created!\n\n(Razorpay gateway will be integrated here)");
     });
   </script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"> </script>
 <script>
   const form = document.getElementById("bookingForm");
 
@@ -126,7 +126,7 @@
     const amount = 500 * seats * 100; // in paise
 
     const options = {
-      key: "rzp_test_1DP5mmOlF5G5ag", // Replace with your actual Razorpay Key ID
+      key: "cfsk_ma_prod_d0743d81bc1c7a145d0caaedb4bb86fb_0d434450", // Replace with your actual Razorpay Key ID
       amount: amount,
       currency: "INR",
       name: "Jaagat Talkis",
